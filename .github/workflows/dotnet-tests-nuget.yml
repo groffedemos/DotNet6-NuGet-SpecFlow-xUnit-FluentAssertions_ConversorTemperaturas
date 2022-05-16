@@ -24,8 +24,11 @@ jobs:
       with:
         dotnet-version: 6.0.201
     - name: Execução dos testes
+      run: dotnet test ${{ env.PATH_TESTS_PROJECT }} --results-directory ${{ env.TEST_RESULTS_DIRECTORY }} --logger:"trx;LogFileName=resultado-testes.xml"
+    - name: Exibir resultado da execução dos testes
+      if: always()
       run: |
-        dotnet test ${{ env.PATH_TESTS_PROJECT }} --results-directory ${{ env.TEST_RESULTS_DIRECTORY }} --logger:"trx;LogFileName=resultado-testes.xml"
+        ls
         cd ${{ env.TEST_RESULTS_DIRECTORY }}
         ls
         cat resultado-testes.xml
