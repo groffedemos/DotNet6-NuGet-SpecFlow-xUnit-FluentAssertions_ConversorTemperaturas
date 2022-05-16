@@ -53,7 +53,7 @@ jobs:
         cd ${{ env.TEST_RESULTS_DIRECTORY }}
         dotnet xunit-to-junit "resultado-testes.trx" "resultado-testes.xml"
         ls
-        cat resultado-testes.trx
+        cat resultado-testes.xml
     - name: Criar Test Summary
       uses: test-summary/action@dist
       with:
