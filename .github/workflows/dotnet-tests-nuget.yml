@@ -11,6 +11,7 @@ env:
   PATH_TESTS_PROJECT: ./Temperatura.Specs/Temperatura.Specs.csproj
   NUGET_SERVER: https://api.nuget.org/v3/index.json
   TEST_RESULTS_DIRECTORY: ./TestResults
+  TEST_RESULTS_FILE: ./TestResults/resultado-testes.xml
 
 jobs:
   tests:
@@ -32,7 +33,11 @@ jobs:
         cd ${{ env.TEST_RESULTS_DIRECTORY }}
         ls
         cat resultado-testes.xml
-        
+    - name: Create test summary
+      uses: test-summary/action@dist
+      with:
+        paths: ${{ env.TEST_RESULTS_FILE }}
+      if: always()        
   pack-push:
     needs: [tests]
     
