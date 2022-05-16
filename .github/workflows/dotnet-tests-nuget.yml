@@ -37,9 +37,23 @@ jobs:
         cd ${{ env.TEST_RESULTS_DIRECTORY }}
         ls
         cat resultado-testes.trx
-    - name: Instalar dotnet-xunit-to-junit
+    - name: Instalar a Global Tool dotnet-xunit-to-junit
       if: always()
       run: dotnet tool install --global dotnet-xunit-to-junit --version 4.0.0
+    - name: Exibir resultado da execução dos testes com xUnit
+      if: always()
+      run: |
+        echo "Conteúdo do diretório ${{ env.TEST_RESULTS_DIRECTORY }}"
+        cd ${{ env.TEST_RESULTS_DIRECTORY }}
+        ls
+        cat resultado-testes.trx
+    - name: Converter XML com resultado da execução dos testes com xUnit para formato do JUnit
+      if: always()
+      run: |
+        cd ${{ env.TEST_RESULTS_DIRECTORY }}
+        dotnet xunit-to-junit "resultado-testes.trx" "resultado-testes.xml"
+        ls
+        cat resultado-testes.trx
     - name: Criar Test Summary
       uses: test-summary/action@dist
       with:
