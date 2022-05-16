@@ -10,6 +10,7 @@ env:
   PATH_PROJECT: ./Temperatura/Temperatura.csproj
   PATH_TESTS_PROJECT: ./Temperatura.Specs/Temperatura.Specs.csproj
   NUGET_SERVER: https://api.nuget.org/v3/index.json
+  TEST_RESULTS_DIRECTORY: ./TestResults
 
 jobs:
   tests:
@@ -24,7 +25,8 @@ jobs:
         dotnet-version: 6.0.201
     - name: Execução dos testes
       run: |
-        dotnet test ${{ env.PATH_TESTS_PROJECT }} --logger:"trx;LogFileName=resultado-testes.xml"
+        dotnet test ${{ env.PATH_TESTS_PROJECT }} --results-directory ${{ env.TEST_RESULTS_DIRECTORY }} --logger:"trx;LogFileName=resultado-testes.xml"
+        cd ${{ env.TEST_RESULTS_DIRECTORY }}
         ls
         cat resultado-testes.xml
         
