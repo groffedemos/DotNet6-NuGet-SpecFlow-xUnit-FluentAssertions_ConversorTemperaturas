@@ -23,7 +23,10 @@ jobs:
       with:
         dotnet-version: 6.0.201
     - name: Execução dos testes
-      run: dotnet test ${{ env.PATH_TESTS_PROJECT }}
+      run: |
+        dotnet test ${{ env.PATH_TESTS_PROJECT }} --logger:"trx;LogFileName=resultado-testes.xml"
+        ls
+        cat resultado-testes.xml
         
   pack-push:
     needs: [tests]
