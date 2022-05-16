@@ -30,9 +30,10 @@ jobs:
       if: always()
       run: |
         ls
+        echo "Conteúdo do diretório ${{ env.TEST_RESULTS_DIRECTORY }}"
         cd ${{ env.TEST_RESULTS_DIRECTORY }}
         ls
-        cat resultado-testes.xml
+        cat resultado-testes.trx
     - name: Create test summary
       uses: test-summary/action@dist
       with:
