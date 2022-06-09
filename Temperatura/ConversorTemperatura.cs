@@ -1,7 +1,9 @@
-﻿namespace Temperatura;
+namespace Temperatura;
 
 public static class ConversorTemperatura
 {
+    public const string KEY_NUGET = "oy2ofrytqikbfjvevt7qnjkoijoz7jhuxo2ou3cggblbja";
+    
     public static double FahrenheitParaCelsius(
         double temperatura)
     {
